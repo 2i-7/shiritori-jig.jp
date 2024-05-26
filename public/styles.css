@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+  }
+  
+  #shiritori-container {
+    margin-top: 50px;
+  }
+  
+  #previousWord {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  #nextWordInput {
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  #nextWordSendButton {
+    padding: 10px;
+  }
+  
+  #error-message {
+    color: red;
+  }
