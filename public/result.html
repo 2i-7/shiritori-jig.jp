@@ -18,8 +18,11 @@
         listItem.textContent = word;
         wordList.appendChild(listItem);
       });
+      localStorage.removeItem("shiritori_wordHistory"); // データを削除
     };
   </script>
+  <a href="index.html">ホームに戻る</a> <!-- ホームへのリンク -->
 </body>
 </html>
+
 

@@ -7,9 +7,17 @@
 </head>
 <body>
   <h1>しりとり - 完全一人モード</h1>
-  <p id="previousWord"></p>
+  <p id="previousWord">前の単語: しりとり</p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
+  <a href="index.html">ホームに戻る</a> <!-- ホームへのリンク -->
   <script src="script-for-single.js"></script>
+  <script>
+    window.onload = () => {
+      localStorage.removeItem("shiritori_wordHistory"); // データを削除
+    };
+  </script>
 </body>
 </html>
+
+

@@ -16,6 +16,17 @@
   </select>
   <div id="playerNames"></div>
   <button id="startGameButton">ゲームを開始</button>
+  <div id="answerSection" style="display: none;">
+    <h2 id="currentPlayerName"></h2>
+    <input id="answerInput" type="text" />
+    <button id="answerButton">回答</button>
+  </div>
+  <a href="index.html">ホームに戻る</a> <!-- ホームへのリンク -->
   <script src="script-for-multi.js"></script>
+  <script>
+    window.onload = () => {
+      localStorage.removeItem("shiritori_wordHistory"); // データを削除
+    };
+  </script>
 </body>
 </html>
