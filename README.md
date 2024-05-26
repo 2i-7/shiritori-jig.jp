@@ -25,4 +25,6 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ・色々調べてたどり着いた結果、[強制的にpushする方法](https://qiita.com/Takao_/items/5e563d5ea61d2829e497)を試したら、
 　Deno導入前のファイルたちいなくなって泣いた
 
+・このREADME.md上げるときもまた強制的にpushしてしまったので、もう泣いても仕方ないなと思った。
+
 #あと3日しかない、福井行きたい、実行委員長も引き続き頑張る(学校の課外活動)の気持ちで残り3日間の記録はここに残そうと思う
