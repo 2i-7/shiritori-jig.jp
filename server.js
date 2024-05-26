@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.223.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.223.0/http/file_server.ts";
 
 let previousWord = "しりとり";
-let wordHistory = []; // 入力された単語を記録する配列
+let wordHistory = [];
 
 const handler = async (request) => {
     const { method, url } = request;
@@ -18,9 +18,8 @@ const handler = async (request) => {
         const requestJson = await request.json();
         const nextWord = requestJson.nextWord;
 
-        // 終了条件のチェック
         if (wordHistory.includes(nextWord) || nextWord.slice(-1) === "ん") {
-            wordHistory.push(nextWord); // 結果ページに表示するために追加
+            wordHistory.push(nextWord);
             const responseHeaders = new Headers({ "Content-Type": "application/json" });
             return new Response(JSON.stringify({ finished: true }), { headers: responseHeaders });
         }
