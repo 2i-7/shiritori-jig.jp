@@ -1,27 +1,46 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
   }
   
-  #shiritori-container {
-    margin-top: 50px;
+  h1 {
+    color: #333;
   }
   
   #previousWord {
     font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  input[type="text"] {
+    font-size: 1em;
+    padding: 10px;
     margin-bottom: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
   
-  #nextWordInput {
-    padding: 10px;
-    margin: 10px;
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
   
-  #nextWordSendButton {
-    padding: 10px;
+  button:hover {
+    background-color: #45a049;
   }
   
-  #error-message {
-    color: red;
-  }
+  
