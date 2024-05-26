@@ -1,36 +1,35 @@
-import { serveDir } from "https://deno.land/std@0.223.0/http/file_server.ts"
+import { serve } from "https://deno.land/std@0.223.0/http/server.ts";
+import { serveDir } from "https://deno.land/std@0.223.0/http/file_server.ts";
 
 let previousWord = "しりとり";
 
-Deno.serve(async (request) => {
+const handler = async (request) => {
+    const { method, url } = request;
     const pathname = new URL(request.url).pathname;
-    console.log(`pathname:${pathname}`);
 
-    //くれと言われた
-    if(request.method === "GET" && pathname === "/shiritori"){
+    console.log(`pathname: ${pathname}`);
+
+    if (method === "GET" && pathname === "/shiritori") {
         return new Response(previousWord);
     }
 
-    //やると言われた
-    if(request.method === "POST" && pathname === "/shiritori"){
+    if (method === "POST" && pathname === "/shiritori") {
         const requestJson = await request.json();
-        const nextWord = requestJson["nextWord"];
+        const nextWord = requestJson.nextWord;
 
-        if(previousWord.slice(-1) === nextWord.slice(0, 1)) {
-        previousWord = nextWord;
+        if (previousWord.slice(-1) === nextWord.charAt(0)) {
+            previousWord = nextWord;
         }
 
         return new Response(previousWord);
     }
 
-    //./public以下のファイルは静的ファイルとして公開
-    return serveDir(
-        request,
-        {
-            fsRoot:"./public",
-            urlRoot:"",
-            enableCors: true,
-        }
-    );
+    return serveDir(request, {
+        fsRoot: "./public",
+        urlRoot: "",
+        enableCors: true,
+    });
+};
 
-});
+serve(handler, { port: 8000 });
+console.log("Server running on http://localhost:8000/");
