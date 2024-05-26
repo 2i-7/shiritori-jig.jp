@@ -32,8 +32,11 @@
 
 ・[querySelector()の使い方をまとめてみた](https://webstyle.work/queryselector/)
 
+・[label要素の使い方](https://style.potepan.com/articles/20037.html#labelfor)
+
 ・[画面遷移後の値渡し](https://yurupro.cloud/3107/#toc1)
 
 ・[Enterキーでも送信できる](https://zoshigayan.net/how-to-get-key-from-ui-event/)
 
 ・[デフォルトの動作をキャンセル](https://qiita.com/yokoto/items/27c56ebc4b818167ef9e)
+
