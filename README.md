@@ -17,9 +17,14 @@
 
 # 参考資料
 学んだこと
+
 ・[非同期処理とは？ 同期処理との違い、実装方法について解説](https://www.rworks.jp/system/system-column/sys-entry/21730/)
+
 ・[非同期処理とは何か、何が嬉しいの？](https://qiita.com/yunity29/items/7ccc84d47e139340ecbc)
+
 ・[小学生でもわかるasync/await/Promise入門](https://teams.microsoft.com/l/message/48:notes/1716691477284?context=%7B%22contextType%22%3A%22chat%22%7D)
+
+・[「GETメゾット」と「POSTメゾット」の違い](https://wa3.i-3-i.info/diff7method.html)
 
 
 
