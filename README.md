@@ -16,7 +16,7 @@
 
 
 # 参考資料
-学んだこと
+言葉の意味・定義
 
 ・[非同期処理とは？ 同期処理との違い、実装方法について解説](https://www.rworks.jp/system/system-column/sys-entry/21730/)
 
@@ -26,7 +26,14 @@
 
 ・[「GETメゾット」と「POSTメゾット」の違い](https://wa3.i-3-i.info/diff7method.html)
 
+
+技術面
+・[Denoの静的ファイルサーバーを3行で書く](https://qiita.com/access3151fq/items/0ff2c50874bba3869ef0)
+
 ・[querySelector()の使い方をまとめてみた](https://webstyle.work/queryselector/)
 
 ・[画面遷移後の値渡し](https://yurupro.cloud/3107/#toc1)
 
+・[Enterキーでも送信できる](https://zoshigayan.net/how-to-get-key-from-ui-event/)
+
+・[デフォルトの動作をキャンセル](https://qiita.com/yokoto/items/27c56ebc4b818167ef9e)

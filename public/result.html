@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>結果</title>
 </head>
 <body>
-    <h1>ゲームオーバー</h1>
-    <p id="errorMessage"></p>
-    <h2>結果確認</h2>
-    <ul id="myList"></ul>
+  <h1>ゲーム結果</h1>
+  <ul id="wordList"></ul>
+  <script>
+    window.onload = async () => {
+      const response = await fetch("/wordHistory");
+      const wordHistory = await response.json();
+      const wordList = document.querySelector("#wordList");
 
-    <button onclick="window.location.href='index.html'"></button>
-    <script src="result.js"></script>
+      wordHistory.forEach(word => {
+        const listItem = document.createElement("li");
+        listItem.textContent = word;
+        wordList.appendChild(listItem);
+      });
+    };
+  </script>
 </body>
 </html>

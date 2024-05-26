@@ -5,6 +5,8 @@ window.onload = async (event) => {
     paragraph.innerHTML = `前の単語: ${previousWord}`;
   };
   
+  let wordHistory = []; // 入力された単語を記録する配列
+  
   document.querySelector("#nextWordSendButton").onclick = async (event) => {
     await sendNextWord();
   };
@@ -20,6 +22,10 @@ window.onload = async (event) => {
     const nextWordInput = document.querySelector("#nextWordInput");
     const nextWordInputText = nextWordInput.value;
   
+    if (nextWordInputText.trim() === "") {
+      return; // 入力が空白の場合は無視する
+    }
+  
     const response = await fetch(
       "/shiritori",
       {
@@ -29,9 +35,26 @@ window.onload = async (event) => {
       }
     );
   
-    const previousWord = await response.text();
-    const paragraph = document.querySelector("#previousWord");
-    paragraph.innerHTML = `前の単語: ${previousWord}`;
-    nextWordInput.value = "";
+    if (response.status === 400) {
+      const errorResult = await response.json();
+      alert(errorResult.error);
+      return;
+    }
+  
+    const result = await response.json();
+  
+    if (result.finished) {
+      window.location.href = "/result"; // 結果ページにリダイレクト
+    } else {
+      const previousWord = result.previousWord;
+      const paragraph = document.querySelector("#previousWord");
+      paragraph.innerHTML = `前の単語: ${previousWord}`;
+  
+      wordHistory.push(nextWordInputText); // 入力された単語を配列に追加
+      console.log(wordHistory); // 配列の内容をログに出力
+  
+      nextWordInput.value = ""; // 入力フィールドをクリア
+    }
   }
+  
   
