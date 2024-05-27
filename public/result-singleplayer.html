@@ -2,12 +2,18 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>結果</title>
+  <title>完全一人モード - 結果</title>
 </head>
 <body>
-  <h1>ゲーム結果</h1>
+  <h1>完全一人モード - ゲーム結果</h1>
   <p id="errorMessage"></p>
   <ul id="wordList"></ul>
+  <a href="index.html" onclick="clearWordHistory()">ホームに戻る</a>
+  <script>
+    async function clearWordHistory() {
+      await fetch("/clearWordHistory", { method: "POST" });
+    }
+  </script>
   <script>
     window.onload = async () => {
       const response = await fetch("/wordHistory");
@@ -25,11 +31,7 @@
       document.querySelector("#errorMessage").innerText = errorMessage;
     };
   </script>
-  <a href="index.html" onclick="clearWordHistory()">ホームに戻る</a> <!-- ホームへのリンク -->
-  <script>
-    async function clearWordHistory() {
-      await fetch("/clearWordHistory", { method: "POST" });
-    }
-  </script>
 </body>
 </html>
+
+
