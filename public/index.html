@@ -12,7 +12,14 @@
     <li><a href="multiplayer.html">みんなでわいわいモード</a></li>
     <li><a href="pcchallenge.html">PC挑戦モード (未実装)</a></li>
   </ul>
-  <a href="index.html" onclick="clearWordHistory()">ホームに戻る</a> <!-- ホームへのリンク -->
+  <a href="TapToStart.html">ホームに戻る</a>
+  <script>
+    window.onload = function() {
+      if (window.performance && window.performance.navigation.type === 1) {
+        window.location.href = "TapToStart.html";
+      }
+    };
+  </script>
   <script>
     async function clearWordHistory() {
       await fetch("/clearWordHistory", { method: "POST" });
@@ -20,4 +27,5 @@
   </script>
 </body>
 </html>
+
 

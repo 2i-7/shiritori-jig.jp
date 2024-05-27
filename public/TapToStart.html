@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Tap To Start</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    #tapArea {
+      font-size: 24px;
+      cursor: pointer;
+      border: 2px solid #333;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="tapArea">Tap To Start</div>
+
+  <script>
+    document.querySelector("#tapArea").addEventListener("click", function() {
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
