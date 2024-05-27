@@ -31,3 +31,4 @@ document.querySelector("#nextWordInput").addEventListener("keypress", async (eve
     document.querySelector("#nextWordSendButton").click();
   }
 });
+

@@ -8,12 +8,16 @@
   <h1>完全一人モード - ゲーム結果</h1>
   <p id="errorMessage"></p>
   <ul id="wordList"></ul>
+<<<<<<< HEAD
   <a href="index.html" onclick="clearWordHistory()">ホームに戻る</a>
   <script>
     async function clearWordHistory() {
       await fetch("/clearWordHistory", { method: "POST" });
     }
   </script>
+=======
+  <a href="index.html">ホームに戻る</a>
+>>>>>>> 6c34d79d145247a49367d6f05bc9b4365cb8fccf
   <script>
     window.onload = async () => {
       const response = await fetch("/wordHistory");
@@ -33,5 +37,8 @@
   </script>
 </body>
 </html>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6c34d79d145247a49367d6f05bc9b4365cb8fccf
