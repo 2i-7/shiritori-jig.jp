@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
-  <title>しりとり - 完全一人モード</title>
+  <title>しりとり - ゲーム</title>
 </head>
 <body>
-  <h1>しりとり - 完全一人モード</h1>
+  <h1>しりとり - ゲーム</h1>
   <p id="previousWord"></p>
+  <p id="currentPlayer"></p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
   <a href="index.html" onclick="clearWordHistory()">ホームに戻る</a> <!-- ホームへのリンク -->
-  <script src="script-for-single.js"></script>
+  <script src="script-for-multiplayer.js"></script>
   <script>
     async function clearWordHistory() {
       await fetch("/clearWordHistory", { method: "POST" });
@@ -19,10 +20,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-

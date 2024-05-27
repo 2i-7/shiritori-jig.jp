@@ -7,25 +7,45 @@
 </head>
 <body>
   <h1>しりとり - みんなでわいわいモード</h1>
-  <label for="playerCount">プレイヤーの人数:</label>
-  <select id="playerCount">
-    <option value="2">2人</option>
-    <option value="3">3人</option>
-    <option value="4">4人</option>
-    <!-- 必要に応じて他の人数を追加 -->
-  </select>
-  <div id="playerNames"></div>
-  <button id="startGameButton">ゲームを開始</button>
-  <div id="answerSection" style="display: none;">
-    <h2 id="currentPlayerName"></h2>
-    <input id="answerInput" type="text" />
-    <button id="answerButton">回答</button>
+  <form id="playerForm">
+    <label for="playerCount">プレイヤーの人数:</label>
+    <input id="playerCount" type="number" min="2" max="10" required />
+    <button type="button" id="startGameButton">ゲームを開始</button>
+  </form>
+  <div id="playerNames" style="display: none;">
+    <h2>プレイヤーの名前を入力してください</h2>
+    <div id="nameInputs"></div>
+    <button type="button" id="startShiritoriButton">ゲームを開始</button>
   </div>
-  <a href="index.html">ホームに戻る</a> <!-- ホームへのリンク -->
-  <script src="script-for-multi.js"></script>
   <script>
-    window.onload = () => {
-      localStorage.removeItem("shiritori_wordHistory"); // データを削除
+    document.querySelector("#startGameButton").onclick = () => {
+      const playerCount = document.querySelector("#playerCount").value;
+      const playerNamesDiv = document.querySelector("#playerNames");
+      const nameInputsDiv = document.querySelector("#nameInputs");
+
+      nameInputsDiv.innerHTML = ''; // Clear previous inputs
+      for (let i = 0; i < playerCount; i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = `プレイヤー ${i + 1} の名前`;
+        input.required = true;
+        nameInputsDiv.appendChild(input);
+      }
+
+      document.querySelector("#playerForm").style.display = "none";
+      playerNamesDiv.style.display = "block";
+    };
+
+    document.querySelector("#startShiritoriButton").onclick = () => {
+      const nameInputs = document.querySelectorAll("#nameInputs input");
+      const playerNames = [];
+
+      nameInputs.forEach(input => {
+        playerNames.push(input.value);
+      });
+
+      localStorage.setItem("playerNames", JSON.stringify(playerNames));
+      window.location.href = "game.html";
     };
   </script>
 </body>

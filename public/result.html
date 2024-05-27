@@ -6,6 +6,7 @@
 </head>
 <body>
   <h1>ゲーム結果</h1>
+  <p id="errorMessage"></p>
   <ul id="wordList"></ul>
   <script>
     window.onload = async () => {
@@ -18,11 +19,17 @@
         listItem.textContent = word;
         wordList.appendChild(listItem);
       });
-      localStorage.removeItem("shiritori_wordHistory"); // データを削除
+
+      const errorResponse = await fetch("/errorMessage");
+      const errorMessage = await errorResponse.text();
+      document.querySelector("#errorMessage").innerText = errorMessage;
     };
   </script>
-  <a href="index.html">ホームに戻る</a> <!-- ホームへのリンク -->
+  <a href="index.html" onclick="clearWordHistory()">ホームに戻る</a> <!-- ホームへのリンク -->
+  <script>
+    async function clearWordHistory() {
+      await fetch("/clearWordHistory", { method: "POST" });
+    }
+  </script>
 </body>
 </html>
-
-

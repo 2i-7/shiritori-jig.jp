@@ -1,55 +1,60 @@
-import { serve } from "https://deno.land/std@0.223.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.223.0/http/file_server.ts";
 
 let previousWord = "しりとり";
 let wordHistory = [];
+let errorMessage = "";
 
-const handler = async (request) => {
-    const { method, url } = request;
-    const pathname = new URL(request.url).pathname;
+function clearWordHistory() {
+  wordHistory = [];
+  previousWord = "しりとり";
+  errorMessage = "";
+}
 
-    console.log(`pathname: ${pathname}`);
+Deno.serve(async (request) => {
+  const pathname = new URL(request.url).pathname;
 
-    if (method === "GET" && pathname === "/shiritori") {
-        return new Response(previousWord);
+  if (request.method === "GET" && pathname === "/shiritori") {
+    return new Response(previousWord);
+  }
+
+  if (request.method === "POST" && pathname === "/shiritori") {
+    const requestJson = await request.json();
+    const nextWord = requestJson["nextWord"];
+
+    if (wordHistory.includes(nextWord) || nextWord.slice(-1) === "ん") {
+      wordHistory.push(nextWord);
+      errorMessage = nextWord.slice(-1) === "ん" ? "最後に「ん」が付きました。" : "同じ単語が入力されました。";
+      return new Response(null, { status: 400 });
     }
 
-    if (method === "POST" && pathname === "/shiritori") {
-        const requestJson = await request.json();
-        const nextWord = requestJson.nextWord;
-
-        if (wordHistory.includes(nextWord) || nextWord.slice(-1) === "ん") {
-            wordHistory.push(nextWord);
-            const responseHeaders = new Headers({ "Content-Type": "application/json" });
-            return new Response(JSON.stringify({ finished: true }), { headers: responseHeaders });
-        }
-
-        if (previousWord.slice(-1) === nextWord.charAt(0)) {
-            previousWord = nextWord;
-            wordHistory.push(nextWord);
-            const responseHeaders = new Headers({ "Content-Type": "application/json" });
-            return new Response(JSON.stringify({ previousWord }), { headers: responseHeaders });
-        } else {
-            const responseHeaders = new Headers({ "Content-Type": "application/json" });
-            return new Response(JSON.stringify({ error: "ルールに違反しました" }), { headers: responseHeaders, status: 400 });
-        }
+    if (previousWord.slice(-1) === nextWord.slice(0, 1)) {
+      wordHistory.push(nextWord);
+      previousWord = nextWord;
+      return new Response(previousWord);
+    } else {
+      errorMessage = "単語の最初の文字が前の単語の最後の文字と一致しません。";
+      return new Response(null, { status: 400 });
     }
+  }
 
-    if (method === "GET" && pathname === "/result") {
-        const html = await Deno.readTextFile("./public/result.html");
-        return new Response(html, { headers: { "Content-Type": "text/html" } });
-    }
+  if (request.method === "POST" && pathname === "/clearWordHistory") {
+    clearWordHistory();
+    return new Response("Word history cleared");
+  }
 
-    if (method === "GET" && pathname === "/wordHistory") {
-        return new Response(JSON.stringify(wordHistory), { headers: { "Content-Type": "application/json" } });
-    }
-
-    return serveDir(request, {
-        fsRoot: "./public",
-        urlRoot: "",
-        enableCors: true,
+  if (request.method === "GET" && pathname === "/wordHistory") {
+    return new Response(JSON.stringify(wordHistory), {
+      headers: { "Content-Type": "application/json" },
     });
-};
+  }
 
-serve(handler, { port: 8000 });
-console.log("Server running on http://localhost:8000/");
+  if (request.method === "GET" && pathname === "/errorMessage") {
+    return new Response(errorMessage);
+  }
+
+  return serveDir(request, {
+    fsRoot: "./public",
+    urlRoot: "",
+    enableCors: true,
+  });
+});

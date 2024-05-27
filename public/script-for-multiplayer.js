@@ -1,8 +1,21 @@
+let playerNames = JSON.parse(localStorage.getItem("playerNames"));
+let currentPlayerIndex = 0;
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+shuffle(playerNames);
+
 window.onload = async (event) => {
   const response = await fetch("/shiritori", { method: "GET" });
   const previousWord = await response.text();
   const paragraph = document.querySelector("#previousWord");
   paragraph.innerHTML = `前の単語: ${previousWord}`;
+  document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
 }
 
 document.querySelector("#nextWordSendButton").onclick = async (event) => {
@@ -20,6 +33,10 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     const paragraph = document.querySelector("#previousWord");
     paragraph.innerHTML = `前の単語: ${previousWord}`;
     nextWordInput.value = "";
+
+    // 次のプレイヤーに交代
+    currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
+    document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
   } else {
     window.location.href = "result.html";
   }
