@@ -21,7 +21,7 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     paragraph.innerHTML = `前の単語: ${previousWord}`;
     nextWordInput.value = "";
   } else {
-    window.location.href = "result.html";
+    window.location.href = "result-singleplayer.html";
   }
 }
 
@@ -31,3 +31,4 @@ document.querySelector("#nextWordInput").addEventListener("keypress", async (eve
     document.querySelector("#nextWordSendButton").click();
   }
 });
+

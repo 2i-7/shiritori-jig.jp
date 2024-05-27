@@ -38,7 +38,7 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
     document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
   } else {
-    window.location.href = "result.html";
+    window.location.href = "result-multiplayer.html";
   }
 }
 

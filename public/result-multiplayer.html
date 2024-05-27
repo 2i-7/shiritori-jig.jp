@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>みんなでわいわいモード - 結果</title>
+</head>
+<body>
+  <h1>みんなでわいわいモード - ゲーム結果</h1>
+  <p id="errorMessage"></p>
+  <ul id="wordList"></ul>
+  <a href="index.html">ホームに戻る</a>
+  <script>
+    window.onload = async () => {
+      const response = await fetch("/wordHistory");
+      const wordHistory = await response.json();
+      const wordList = document.querySelector("#wordList");
+
+      wordHistory.forEach(word => {
+        const listItem = document.createElement("li");
+        listItem.textContent = word;
+        wordList.appendChild(listItem);
+      });
+
+      const errorResponse = await fetch("/errorMessage");
+      const errorMessage = await errorResponse.text();
+      document.querySelector("#errorMessage").innerText = errorMessage;
+    };
+  </script>
+</body>
+</html>
+
