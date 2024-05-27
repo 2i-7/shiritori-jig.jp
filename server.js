@@ -21,13 +21,21 @@ Deno.serve(async (request) => {
     const requestJson = await request.json();
     const nextWord = requestJson["nextWord"];
 
+    // 直前の単語の最後の文字が「ー」の場合、その前の文字を使用
+    let lastChar = previousWord.slice(-1);
+    if (lastChar === "ー" && previousWord.length > 1) {
+      lastChar = previousWord.slice(-2, -1);
+    }
+
+    // 同じ単語が入力されたか「ん」で終わる単語が入力されたかをチェック
     if (wordHistory.includes(nextWord) || nextWord.slice(-1) === "ん") {
       wordHistory.push(nextWord);
       errorMessage = nextWord.slice(-1) === "ん" ? "最後に「ん」が付きました。" : "同じ単語が入力されました。";
       return new Response(null, { status: 400 });
     }
 
-    if (previousWord.slice(-1) === nextWord.slice(0, 1)) {
+    // 次の単語が直前の単語の最後の文字と一致するかをチェック
+    if (lastChar === nextWord.slice(0, 1)) {
       wordHistory.push(nextWord);
       previousWord = nextWord;
       return new Response(previousWord);

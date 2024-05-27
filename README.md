@@ -40,3 +40,4 @@
 
 ・[デフォルトの動作をキャンセル](https://qiita.com/yokoto/items/27c56ebc4b818167ef9e)
 
+・[ひらがな/カタカナ](https://www.javadrive.jp/regex-basic/sample/index8.html)

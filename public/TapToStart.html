@@ -18,8 +18,8 @@
     }
 
     #tapImage {
-      max-width: 80%; /* 画像の最大幅を80%に設定 */
-      max-height: 80vh; /* 画像の最大高さを画面の80%に設定 */
+      max-width: 80%;
+      max-height: 80vh;
     }
   </style>
 </head>
@@ -33,7 +33,7 @@
       document.querySelector("#tapImage").src = "image/TapToStart-after.png";
       setTimeout(function() {
         window.location.href = "index.html";
-      }, 600); // 0.6秒後にindex.htmlに遷移
+      }, 500);
     });
   </script>
 </body>
