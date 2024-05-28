@@ -60,6 +60,8 @@
 
 # アプリの動作確認の方法
 
+お手数をおかけしますが、Denoを持ちいてローカルHTTPサーバーを立てる形で作成したため、一度すべてのファイルをダウンロードして頂きたいです。
+
 ・deno run --allow-read --allow-net --watch server.js　とターミナルでうつ
 
 ・localhost:8080へアクセスすることで、TapToStartの画面が出てくると思います。
@@ -80,6 +82,7 @@
 
 
 技術面
+
 ・[Denoの静的ファイルサーバーを3行で書く](https://qiita.com/access3151fq/items/0ff2c50874bba3869ef0)
 
 ・[querySelector()の使い方をまとめてみた](https://webstyle.work/queryselector/)
