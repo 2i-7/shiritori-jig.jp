@@ -6,11 +6,11 @@
   <title>しりとり - 完全一人モード</title>
 </head>
 <body>
-  <h1>しりとり - 完全一人モード</h1>
+  <img src="image/title-single.png" alt="しりとり" style="width: 200px;">
   <p id="previousWord"></p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
-  <a href="TapToStart.html" onclick="clearWordHistory()">ホームに戻る</a> <!-- ホームへのリンク -->
+  <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">ホームに戻る</a> <!-- ホームへのリンク -->
   <script src="script-for-single.js"></script>
   <script>
     async function clearWordHistory() {

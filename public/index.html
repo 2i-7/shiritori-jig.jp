@@ -3,44 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
-  <title>しりとり</title>
-  <style>
-    #gameOptions {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .gameButton {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 18px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      background-color: #007bff;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .gameButton:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <title>しりとりゲーム</title>
 </head>
 <body>
-  <h1>しりとり</h1>
-  <div id="gameOptions">
-    <button class="gameButton" onclick="location.href='singleplayer.html'">完全一人モード</button>
-    <button class="gameButton" onclick="location.href='multiplayer.html'">みんなでわいわいモード</button>
-    <button class="gameButton" onclick="location.href='pcchallenge.html'">PC挑戦モード (未実装)</button>
-  </div>
-  <a href="TapToStart.html">ホームに戻る</a>
+  <img src="image/title.png" alt="title" style="width: 200px;">
+  <ul>
+    <button onclick="location.href='singleplayer.html'">完全一人モード</button>
+    <button onclick="location.href='multiplayer.html'">みんなでわいわいモード</button>
+  </ul>
+  <button onclick="location.href='TapToStart.html'" class="home-button">ホームに戻る</button>
   <script>
-    window.onload = function() {
-      if (window.performance && window.performance.navigation.type === 1) {
-        window.location.href = "TapToStart.html";
-      }
+    window.onbeforeunload = function() {
+      fetch('/clearWordHistory', { method: 'POST' });
     };
   </script>
 </body>
