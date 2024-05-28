@@ -9,7 +9,11 @@
   <img src="image/title-multi.png" alt="しりとり" style="width: 300px;"><br><br>
   <form id="playerForm">
     <label for="playerCount">プレイヤーの人数:</label>
-    <input id="playerCount" type="number" min="2" max="10" required />
+    <select id="playerCount" required>
+      <option value="2">2人</option>
+      <option value="3">3人</option>
+      <option value="4">4人</option>
+    </select>
     <button type="button" id="startGameButton">ゲームを開始</button>
   </form>
   <div id="playerNames" style="display: none;">
@@ -51,17 +55,12 @@
   <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">
     <img src="image/home.png" alt="home" style="width: 50px;" id="homeButtonImage">
   </a>
+  <script src="script-for-multiplayer.js"></script>
   <script>
-    function clearWordHistory() {
-      fetch("/clearWordHistory", { method: "POST" });
-    }
-
-    document.querySelector(".home-button").addEventListener("click", function() {
+    async function clearWordHistory() {
       document.getElementById("homeButtonImage").src = "image/home-smoke.png";
-      setTimeout(function() {
-        window.location.href = "TapToStart.html";
-      }, 1000); // 1秒後にリダイレクト
-    });
+      await fetch("/clearWordHistory", { method: "POST" });
+    }
   </script>
 </body>
 </html>

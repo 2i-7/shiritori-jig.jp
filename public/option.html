@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>モードを選択してください</title>
+</head>
+<body>
+  <script>
+    // URLからmodeパラメータを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+
+    // モードに応じてリダイレクト
+    if (mode === 'singleplayer') {
+      location.href = 'singleplayer.html';
+    } else if (mode === 'multiplayer') {
+      location.href = 'multiplayer.html';
+    } else {
+      // モードが不明な場合はindex.htmlにリダイレクト
+      location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

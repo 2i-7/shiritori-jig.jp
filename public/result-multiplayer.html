@@ -29,6 +29,7 @@
 
     #dino {
       width: 200px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -55,7 +56,7 @@
       const lastPlayer = localStorage.getItem("lastPlayer");
 
       document.getElementById("errorMessage").textContent = errorMessage;
-      document.getElementById("lastPlayerMessage").textContent = `${lastPlayer}の負け...。`;
+      document.getElementById("lastPlayerMessage").textContent = `最後に単語を入力したプレイヤー: ${lastPlayer}から ${lastPlayer}の負け...。`;
 
       const wordList = document.getElementById("wordHistory");
       wordHistory.forEach(word => {
@@ -77,13 +78,18 @@
         }
       });
 
-      document.getElementById("homeButton").addEventListener("click", async () => {
+      document.querySelector(".home-button").addEventListener("click", async () => {
         await fetch("/clearWordHistory", { method: "POST" });
         localStorage.removeItem("wordHistory");
         localStorage.removeItem("errorMessage");
         localStorage.removeItem("lastPlayer");
       });
     };
+
+    async function clearWordHistory() {
+      document.getElementById("homeButtonImage").src = "image/home-smoke.png";
+      await fetch("/clearWordHistory", { method: "POST" });
+    }
   </script>
 </body>
 </html>
