@@ -11,14 +11,20 @@
     <button onclick="location.href='singleplayer.html'">完全一人モード</button>
     <button onclick="location.href='multiplayer.html'">みんなでわいわいモード</button>
   </ul>
-  <button onclick="location.href='TapToStart.html'" class="home-button">ホームに戻る</button>
+  <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">
+    <img src="image/home.png" alt="home" style="width: 50px;" id="homeButtonImage">
+  </a>
   <script>
-    window.onload = function() {
-      if (!sessionStorage.getItem('visited')) {
-        sessionStorage.setItem('visited', 'true');
-        window.location.href = 'TapToStart.html';
-      }
-    };
+    function clearWordHistory() {
+      fetch("/clearWordHistory", { method: "POST" });
+    }
+
+    document.querySelector(".home-button").addEventListener("click", function() {
+      document.getElementById("homeButtonImage").src = "image/home-smoke.png";
+      setTimeout(function() {
+        window.location.href = "TapToStart.html";
+      }, 1000); // 1秒後にリダイレクト
+    });
   </script>
 </body>
 </html>

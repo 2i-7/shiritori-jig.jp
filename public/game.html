@@ -6,19 +6,35 @@
   <title>ゲーム - みんなでわいわいモード</title>
 </head>
 <body>
-  <img src="image/title-multi.png" alt="しりとり" style="width: 300px;">
+  <h1><img src="image/title-multi.png" alt="しりとり" style="width: 300px;"></h1>
   <p id="previousWord"></p>
   <p id="currentPlayer"></p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
-  <a href="TapToStart.html" id="homeButton" class="home-button">ホームに戻る</a>
+  <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">
+    <img src="image/home.png" alt="home" style="width: 50px;" id="homeButtonImage">
+  </a>
   <script src="script-for-multiplayer.js"></script>
   <script>
     async function clearWordHistory() {
       await fetch("/clearWordHistory", { method: "POST" });
     }
   </script>
+  <script>
+    function clearWordHistory() {
+      fetch("/clearWordHistory", { method: "POST" });
+    }
+  
+    document.querySelector(".home-button").addEventListener("click", function() {
+      document.getElementById("homeButtonImage").src = "image/home-smoke.png";
+      setTimeout(function() {
+        window.location.href = "TapToStart.html";
+      }, 1000); // 1秒後にリダイレクト
+    });
+  </script>
+  
 </body>
 </html>
+
 
 

@@ -17,7 +17,6 @@
     <div id="nameInputs"></div>
     <button type="button" id="startShiritoriButton">ゲームを開始</button>
   </div>
-  <a href="TapToStart.html" class="home-button">ホームに戻る</a>
   <script>
     document.querySelector("#startGameButton").onclick = () => {
       const playerCount = document.querySelector("#playerCount").value;
@@ -48,13 +47,21 @@
       localStorage.setItem("playerNames", JSON.stringify(playerNames));
       window.location.href = "game.html";
     };
+  </script>
+  <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">
+    <img src="image/home.png" alt="home" style="width: 50px;" id="homeButtonImage">
+  </a>
+  <script>
+    function clearWordHistory() {
+      fetch("/clearWordHistory", { method: "POST" });
+    }
 
-    window.onload = function() {
-      if (!sessionStorage.getItem('visited')) {
-        sessionStorage.setItem('visited', 'true');
-        window.location.href = 'TapToStart.html';
-      }
-    };
+    document.querySelector(".home-button").addEventListener("click", function() {
+      document.getElementById("homeButtonImage").src = "image/home-smoke.png";
+      setTimeout(function() {
+        window.location.href = "TapToStart.html";
+      }, 1000); // 1秒後にリダイレクト
+    });
   </script>
 </body>
 </html>

@@ -26,15 +26,22 @@
       left: 10px;
       z-index: 9999;
     }
+
+    #dino {
+      width: 200px;
+    }
   </style>
 </head>
 <body>
-  <h1>ゲーム終了</h1>
+  <img src="image/title-result.png" alt="結果" style="width: 200px;">
   <p id="errorMessage" class="error"></p>
-  <h2>入力された単語のリスト:</h2>
-  <ul id="wordHistory"></ul>
-  <p id="lastPlayerMessage"></p> <!-- 最後に入力したプレイヤーの名前を表示 -->
-  <a href="TapToStart.html" id="homeButton" class="home-button">ホームに戻る</a>
+  <h2 id="lastPlayerMessage"></h2>
+  <img id="dino" src="image/dino.png" alt="dino"><br><br>
+  <button id="toggleWordsButton">結果の表示</button>
+  <ul id="wordHistory" style="display: none;"></ul>
+  <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">
+    <img src="image/home.png" alt="home" style="width: 50px;" id="homeButtonImage">
+  </a>
   <script>
     window.onload = function() {
       if (!sessionStorage.getItem('visited')) {
@@ -42,13 +49,13 @@
         window.location.href = 'TapToStart.html';
         return;
       }
-      
+
       const wordHistory = JSON.parse(localStorage.getItem("wordHistory"));
       const errorMessage = localStorage.getItem("errorMessage");
-      const lastPlayer = localStorage.getItem("lastPlayer"); // 追加
-      
+      const lastPlayer = localStorage.getItem("lastPlayer");
+
       document.getElementById("errorMessage").textContent = errorMessage;
-      document.getElementById("lastPlayerMessage").textContent = `最後に単語を入力したプレイヤー: ${lastPlayer}`; // 追加
+      document.getElementById("lastPlayerMessage").textContent = `${lastPlayer}の負け...。`;
 
       const wordList = document.getElementById("wordHistory");
       wordHistory.forEach(word => {
@@ -57,12 +64,24 @@
         wordList.appendChild(listItem);
       });
 
-      // ホームボタンがクリックされたときに単語履歴をクリア
+      const toggleWordsButton = document.getElementById("toggleWordsButton");
+      toggleWordsButton.addEventListener("click", () => {
+        if (wordList.style.display === "none") {
+          wordList.style.display = "block";
+          toggleWordsButton.textContent = "結果の非表示";
+          document.getElementById("dino").src = "image/dino-fire.png";
+        } else {
+          wordList.style.display = "none";
+          toggleWordsButton.textContent = "結果の表示";
+          document.getElementById("dino").src = "image/dino.png";
+        }
+      });
+
       document.getElementById("homeButton").addEventListener("click", async () => {
         await fetch("/clearWordHistory", { method: "POST" });
         localStorage.removeItem("wordHistory");
         localStorage.removeItem("errorMessage");
-        localStorage.removeItem("lastPlayer"); // 追加
+        localStorage.removeItem("lastPlayer");
       });
     };
   </script>
