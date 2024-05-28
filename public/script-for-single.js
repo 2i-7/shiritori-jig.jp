@@ -21,6 +21,9 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     paragraph.innerHTML = `前の単語: ${previousWord}`;
     nextWordInput.value = "";
   } else {
+    const errorData = await response.json();
+    localStorage.setItem("wordHistory", JSON.stringify(errorData.wordHistory));
+    localStorage.setItem("errorMessage", errorData.errorMessage);
     window.location.href = "result-singleplayer.html";
   }
 }
@@ -31,4 +34,3 @@ document.querySelector("#nextWordInput").addEventListener("keypress", async (eve
     document.querySelector("#nextWordSendButton").click();
   }
 });
-

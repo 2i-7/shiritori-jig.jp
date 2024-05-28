@@ -38,6 +38,9 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
     document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
   } else {
+    const errorData = await response.json();
+    localStorage.setItem("wordHistory", JSON.stringify(errorData.wordHistory));
+    localStorage.setItem("errorMessage", errorData.errorMessage);
     window.location.href = "result-multiplayer.html";
   }
 }
@@ -48,3 +51,4 @@ document.querySelector("#nextWordInput").addEventListener("keypress", async (eve
     document.querySelector("#nextWordSendButton").click();
   }
 });
+

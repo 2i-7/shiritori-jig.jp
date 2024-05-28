@@ -1,12 +1,12 @@
 import { serveDir } from "https://deno.land/std@0.223.0/http/file_server.ts";
 
 let previousWord = "しりとり";
-let wordHistory = [];
+let wordHistory = [previousWord];
 let errorMessage = "";
 
 function clearWordHistory() {
-  wordHistory = [];
   previousWord = "しりとり";
+  wordHistory = [previousWord];
   errorMessage = "";
 }
 
@@ -31,7 +31,7 @@ Deno.serve(async (request) => {
     if (wordHistory.includes(nextWord) || nextWord.slice(-1) === "ん") {
       wordHistory.push(nextWord);
       errorMessage = nextWord.slice(-1) === "ん" ? "最後に「ん」が付きました。" : "同じ単語が入力されました。";
-      return new Response(null, { status: 400 });
+      return new Response(JSON.stringify({ wordHistory, errorMessage }), { status: 400 });
     }
 
     // 次の単語が直前の単語の最後の文字と一致するかをチェック
@@ -40,8 +40,9 @@ Deno.serve(async (request) => {
       previousWord = nextWord;
       return new Response(previousWord);
     } else {
+      wordHistory.push(nextWord);
       errorMessage = "単語の最初の文字が前の単語の最後の文字と一致しません。";
-      return new Response(null, { status: 400 });
+      return new Response(JSON.stringify({ wordHistory, errorMessage }), { status: 400 });
     }
   }
 
@@ -66,3 +67,6 @@ Deno.serve(async (request) => {
     enableCors: true,
   });
 });
+
+
+

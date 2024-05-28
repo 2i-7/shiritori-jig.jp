@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
-  <title>しりとり - ゲーム</title>
+  <title>ゲーム - みんなでわいわいモード</title>
 </head>
 <body>
-  <h1>しりとり - ゲーム</h1>
+  <h1>しりとり - みんなでわいわいモード</h1>
   <p id="previousWord"></p>
   <p id="currentPlayer"></p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
-  <a href="TapToStart.html" onclick="clearWordHistory()">ホームに戻る</a> <!-- ホームへのリンク -->
+  <a href="TapToStart.html" id="homeButton">ホームに戻る</a>
   <script src="script-for-multiplayer.js"></script>
   <script>
     async function clearWordHistory() {
