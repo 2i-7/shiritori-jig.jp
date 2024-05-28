@@ -33,6 +33,7 @@
   <p id="errorMessage" class="error"></p>
   <h2>入力された単語のリスト:</h2>
   <ul id="wordHistory"></ul>
+  <p id="lastPlayerMessage"></p> <!-- 最後に入力したプレイヤーの名前を表示 -->
   <a href="TapToStart.html" id="homeButton" class="home-button">ホームに戻る</a>
   <script>
     window.onload = function() {
@@ -44,8 +45,10 @@
       
       const wordHistory = JSON.parse(localStorage.getItem("wordHistory"));
       const errorMessage = localStorage.getItem("errorMessage");
+      const lastPlayer = localStorage.getItem("lastPlayer"); // 追加
       
       document.getElementById("errorMessage").textContent = errorMessage;
+      document.getElementById("lastPlayerMessage").textContent = `最後に単語を入力したプレイヤー: ${lastPlayer}`; // 追加
 
       const wordList = document.getElementById("wordHistory");
       wordHistory.forEach(word => {
@@ -59,9 +62,9 @@
         await fetch("/clearWordHistory", { method: "POST" });
         localStorage.removeItem("wordHistory");
         localStorage.removeItem("errorMessage");
+        localStorage.removeItem("lastPlayer"); // 追加
       });
     };
   </script>
 </body>
 </html>
-

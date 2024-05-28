@@ -16,16 +16,38 @@ window.onload = async (event) => {
   const paragraph = document.querySelector("#previousWord");
   paragraph.innerHTML = `前の単語: ${previousWord}`;
   document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const charLimit = urlParams.get('charLimit');
+  const timeLimit = urlParams.get('timeLimit');
+
+  if (charLimit) {
+    document.getElementById('nextWordInput').setAttribute('maxlength', charLimit);
+  }
+
+  if (timeLimit) {
+    let timer;
+    document.getElementById('nextWordInput').oninput = function() {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        document.getElementById('nextWordSendButton').click();
+      }, timeLimit * 1000);
+    };
+  }
 }
 
 document.querySelector("#nextWordSendButton").onclick = async (event) => {
   const nextWordInput = document.querySelector("#nextWordInput");
   const nextWordInputText = nextWordInput.value;
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const charLimit = urlParams.get('charLimit');
+  const timeLimit = urlParams.get('timeLimit');
+
   const response = await fetch("/shiritori", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nextWord: nextWordInputText })
+    body: JSON.stringify({ nextWord: nextWordInputText, playerName: playerNames[currentPlayerIndex] }) // 変更
   });
 
   if (response.ok) {
@@ -38,9 +60,10 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
     document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
   } else {
-    const errorData = await response.json();
-    localStorage.setItem("wordHistory", JSON.stringify(errorData.wordHistory));
-    localStorage.setItem("errorMessage", errorData.errorMessage);
+    const errorResponse = await response.json();
+    localStorage.setItem('lastPlayer', errorResponse.lastPlayer); // 追加
+    localStorage.setItem('wordHistory', JSON.stringify(errorResponse.wordHistory)); // 追加
+    localStorage.setItem('errorMessage', errorResponse.errorMessage); // 追加
     window.location.href = "result-multiplayer.html";
   }
 }
@@ -52,3 +75,9 @@ document.querySelector("#nextWordInput").addEventListener("keypress", async (eve
   }
 });
 
+document.querySelector("#nextWordInput").addEventListener("input", () => {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    document.querySelector("#nextWordSendButton").click();
+  }, timeLimit * 1000);
+});
