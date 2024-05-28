@@ -10,12 +10,24 @@
   <p id="previousWord"></p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
-  <a href="TapToStart.html" onclick="clearWordHistory()" class="home-button">ホームに戻る</a> <!-- ホームへのリンク -->
+  <a href="TapToStart.html" class="home-button">ホームに戻る</a>
   <script src="script-for-single.js"></script>
   <script>
     async function clearWordHistory() {
       await fetch("/clearWordHistory", { method: "POST" });
     }
+
+    // ページを離れるときに単語履歴をクリア
+    window.onbeforeunload = function() {
+      clearWordHistory();
+    };
+
+    window.onload = function() {
+      if (!sessionStorage.getItem('visited')) {
+        sessionStorage.setItem('visited', 'true');
+        window.location.href = 'TapToStart.html';
+      }
+    };
   </script>
 </body>
 </html>

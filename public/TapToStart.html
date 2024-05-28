@@ -2,40 +2,36 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Tap To Start</title>
+  <title>Tap to Start</title>
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
       background-color: #f0f0f0;
     }
-
-    #tapArea {
-      cursor: pointer;
+    .container {
+      text-align: center;
     }
-
-    #tapImage {
-      max-width: 80%;
-      max-height: 80vh;
+    .container img {
+      width: 300px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="tapArea">
-    <img id="tapImage" src="image/TapToStart-before.png" alt="Tap To Start">
+  <div class="container">
+    <img id="tapToStart" src="image/TapToStart-before.png" alt="Tap to Start">
   </div>
-
   <script>
-    document.querySelector("#tapArea").addEventListener("click", function() {
-      document.querySelector("#tapImage").src = "image/TapToStart-after.png";
-      setTimeout(function() {
+    document.getElementById("tapToStart").addEventListener("click", function() {
+      this.src = "image/TapToStart-after.png";
+      setTimeout(() => {
         window.location.href = "index.html";
-      }, 500);
+      }, 500); // 0.5秒後にリダイレクト
     });
   </script>
 </body>
 </html>
-

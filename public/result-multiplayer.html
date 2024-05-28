@@ -21,10 +21,10 @@
     }
 
     .home-button {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 9999;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 9999;
     }
   </style>
 </head>
@@ -36,6 +36,12 @@
   <a href="TapToStart.html" id="homeButton" class="home-button">ホームに戻る</a>
   <script>
     window.onload = function() {
+      if (!sessionStorage.getItem('visited')) {
+        sessionStorage.setItem('visited', 'true');
+        window.location.href = 'TapToStart.html';
+        return;
+      }
+      
       const wordHistory = JSON.parse(localStorage.getItem("wordHistory"));
       const errorMessage = localStorage.getItem("errorMessage");
       
@@ -58,3 +64,5 @@
   </script>
 </body>
 </html>
+
+

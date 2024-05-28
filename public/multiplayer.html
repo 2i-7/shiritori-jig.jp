@@ -17,6 +17,7 @@
     <div id="nameInputs"></div>
     <button type="button" id="startShiritoriButton">ゲームを開始</button>
   </div>
+  <a href="TapToStart.html" class="home-button">ホームに戻る</a>
   <script>
     document.querySelector("#startGameButton").onclick = () => {
       const playerCount = document.querySelector("#playerCount").value;
@@ -46,6 +47,13 @@
 
       localStorage.setItem("playerNames", JSON.stringify(playerNames));
       window.location.href = "game.html";
+    };
+
+    window.onload = function() {
+      if (!sessionStorage.getItem('visited')) {
+        sessionStorage.setItem('visited', 'true');
+        window.location.href = 'TapToStart.html';
+      }
     };
   </script>
 </body>

@@ -19,11 +19,12 @@
       list-style: none;
       padding: 0;
     }
+
     .home-button {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 9999;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 9999;
     }
   </style>
 </head>
@@ -32,9 +33,15 @@
   <p id="errorMessage" class="error"></p>
   <h2>入力された単語のリスト:</h2>
   <ul id="wordHistory"></ul>
-  <a href="TapToStart.html" class="home-button">ホームに戻る</a>
+  <a href="TapToStart.html" id="homeButton" class="home-button">ホームに戻る</a>
   <script>
     window.onload = function() {
+      if (!sessionStorage.getItem('visited')) {
+        sessionStorage.setItem('visited', 'true');
+        window.location.href = 'TapToStart.html';
+        return;
+      }
+      
       const wordHistory = JSON.parse(localStorage.getItem("wordHistory"));
       const errorMessage = localStorage.getItem("errorMessage");
       
@@ -57,3 +64,4 @@
   </script>
 </body>
 </html>
+

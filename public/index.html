@@ -13,11 +13,13 @@
   </ul>
   <button onclick="location.href='TapToStart.html'" class="home-button">ホームに戻る</button>
   <script>
-    window.onbeforeunload = function() {
-      fetch('/clearWordHistory', { method: 'POST' });
+    window.onload = function() {
+      if (!sessionStorage.getItem('visited')) {
+        sessionStorage.setItem('visited', 'true');
+        window.location.href = 'TapToStart.html';
+      }
     };
   </script>
 </body>
 </html>
-
 
