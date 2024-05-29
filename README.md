@@ -7,10 +7,12 @@
 ・開発期限3日前、エラーがひっきりなしに出た焦りから、[強制的にpushする方法](https://qiita.com/Takao_/items/5e563d5ea61d2829e497)を試したら、いままでの履歴たちがいなくなってしまいました。がんばります。
 
 # 使用技術
-|TapToStartの画面|モード選択画面|
-|----|----|
+|TapToStartの画面|
+|----|
 |![taptostart](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/4f48b334-c478-417a-b220-f3fb9b5c86d3)
 |![taptostart2](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/78d53eae-93ce-4ae2-9fc6-3f1d0c65243d)|
+|画面を押されたら恐竜が生まれて、モード選択画面へ飛ぶ|
+
 
 
 
