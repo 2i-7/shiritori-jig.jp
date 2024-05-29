@@ -6,13 +6,40 @@
 
 ・開発期限3日前、エラーがひっきりなしに出た焦りから、[強制的にpushする方法](https://qiita.com/Takao_/items/5e563d5ea61d2829e497)を試したら、いままでの履歴たちがいなくなってしまいました。がんばります。
 
-# 使用技術
-|TapToStartの画面|
-|----|
-|![taptostart](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/4f48b334-c478-417a-b220-f3fb9b5c86d3)
-|![taptostart2](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/78d53eae-93ce-4ae2-9fc6-3f1d0c65243d)|
-|画面を押されたら恐竜が生まれて、モード選択画面へ飛ぶ|
+# 使用した技術
 
+|言語|用途|
+|----|----|
+|Deno|サーバーの処理|
+|JavaScript|機能の制御や動作の追加|
+|HTML|ページ内の情報を構造化|
+|CSS|構造要素の装飾|
+
+
+# 機能紹介
+
+|TapToStartの画面|モード選択画面|
+|----|----|
+|![taptostart](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/4f48b334-c478-417a-b220-f3fb9b5c86d3)|![modeselect](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/3492f93c-2caf-4f69-91e9-2af89d7d7d4a)|
+|![taptostart2](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/78d53eae-93ce-4ae2-9fc6-3f1d0c65243d)|![example](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/33a00317-4d2a-4c9f-984b-8369c721e9d2)|
+|画面を押されたら恐竜が生まれて、モード選択画面へ飛ぶ|モード選択画面で選択したら、各ゲームに遷移する。(例：「完全一人モード」へ移動したときの写真)|
+
+|完全一人モード|完全一人モードの結果画面|
+|----|----|
+|![singleringo](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/64a377c0-5485-4d7b-8ee3-b9eb42bae43e)|![singleresult](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/0002d623-1c16-442a-beea-2b3d96ea6846)|
+|<img width="425" alt="single2" src="https://github.com/2i-7/shiritori-jig.jp/assets/169513507/d450b9e0-d601-4788-a7d1-0c50e0000c87">|![singlekekka](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/a721a93f-b4ab-4f65-9c04-5148cffbfbfb)|
+|単語を入力して送信ボタン(またはEnterキー)を押すと、判定されて問題なければ、前の単語として表示される|入力された単語数と、結果の表示/非表示に合わせて恐竜が火を噴く(恐竜って火噴くのかな？)|
+
+|みんなでわいわいモードのプレイヤー名入力|みんなでわいわいモードのプレイ画面|
+|----|----|
+|![multi](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/7c22e391-57bb-4a50-9366-a3d7b9ab7f0b)|![画像15](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/227b431c-17b6-4f9f-8b60-00dc51a472cf)|
+|![playername](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/affeb014-9ba7-47cd-bbe7-a2e3f936d9f6)|<img width="425" alt="画像17" src="https://github.com/2i-7/shiritori-jig.jp/assets/169513507/7bfbba67-f1db-4d7a-8a8b-13f85904b475">|
+|2~4人の中から人数を選択し、各プレイヤーの名前を保存する。また、ここでは任意の名前を入力することができる。|実際のゲーム画面では、前の単語だけでなく、プレイヤーアイコンとプレイヤー名も表示し、送信ボタン(またはEnterキー)を押すとプレイヤーアイコンが手をあげる|
+
+|みんなでわいわいモード|の結果画面|
+|----|----|
+|![8](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/6c539277-b6d4-4a8b-a77e-be89185931d6)|![aa](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/cb58ce95-bc5a-410b-b026-04ad3a5627ae)|
+|最後に入力したプレイヤー(負けた)の名前を表示し、|結果の表示/非表示に合わせて恐竜が火を噴く|
 
 
 
