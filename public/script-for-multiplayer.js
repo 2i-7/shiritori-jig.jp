@@ -3,19 +3,31 @@
 let playerNames = JSON.parse(localStorage.getItem("playerNames"));
 let currentPlayerIndex = 0;
 let playerIcons = {};
+let playerIconsYes = {};
 
-function getRandomPlayerIcon() {
-  const playerIcons = ["image/boy1.png", "image/boy2.png", "image/girl1.png", "image/girl2.png"];
-  const randomIndex = Math.floor(Math.random() * playerIcons.length);
-  return playerIcons[randomIndex];
+const availableIcons = [
+  "image/boy1.png",
+  "image/boy2.png",
+  "image/girl1.png",
+  "image/girl2.png"
+];
+
+function getYesVersion(iconPath) {
+  return iconPath.replace(".png", "-yes.png");
 }
 
-// 各プレイヤーにランダムなアイコンを割り当てる
-playerNames.forEach(player => {
-  playerIcons[player] = getRandomPlayerIcon();
-});
+// 各プレイヤーに一意のアイコンをランダムに割り当てる
+function assignUniqueIcons(playerNames, icons) {
+  const shuffledIcons = [...icons];
+  shuffle(shuffledIcons);
+  playerNames.forEach((player, index) => {
+    const icon = shuffledIcons[index];
+    playerIcons[player] = icon;
+    playerIconsYes[player] = getYesVersion(icon);
+  });
+}
 
-// プレイヤーアイコンをシャッフル
+// 配列をシャッフル
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -23,6 +35,10 @@ function shuffle(array) {
   }
 }
 
+// アイコンを割り当てる
+assignUniqueIcons(playerNames, availableIcons);
+
+// プレイヤー名をシャッフル
 shuffle(playerNames);
 
 window.onload = async (event) => {
@@ -40,10 +56,13 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
   const nextWordInput = document.querySelector("#nextWordInput");
   const nextWordInputText = nextWordInput.value;
 
+  // プレイヤーアイコンを一時的に変更
+  document.querySelector("#playerIcon").src = playerIconsYes[playerNames[currentPlayerIndex]];
+
   const response = await fetch("/shiritori", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nextWord: nextWordInputText, playerName: playerNames[currentPlayerIndex] }) // 変更
+    body: JSON.stringify({ nextWord: nextWordInputText, playerName: playerNames[currentPlayerIndex] })
   });
 
   if (response.ok) {
@@ -53,16 +72,19 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     nextWordInput.value = "";
 
     // 次のプレイヤーに交代
-    currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
-    document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
+    setTimeout(() => {
+      currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
+      document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
 
-    // プレイヤーアイコンを更新
-    document.querySelector("#playerIcon").src = playerIcons[playerNames[currentPlayerIndex]];
+      // プレイヤーアイコンを更新
+      document.querySelector("#playerIcon").src = playerIcons[playerNames[currentPlayerIndex]];
+    }, 1000); // 1秒待ってから次のプレイヤーに交代
+
   } else {
     const errorResponse = await response.json();
-    localStorage.setItem('lastPlayer', errorResponse.lastPlayer); // 追加
-    localStorage.setItem('wordHistory', JSON.stringify(errorResponse.wordHistory)); // 追加
-    localStorage.setItem('errorMessage', errorResponse.errorMessage); // 追加
+    localStorage.setItem('lastPlayer', errorResponse.lastPlayer);
+    localStorage.setItem('wordHistory', JSON.stringify(errorResponse.wordHistory));
+    localStorage.setItem('errorMessage', errorResponse.errorMessage);
     window.location.href = "result-multiplayer.html";
   }
 }
