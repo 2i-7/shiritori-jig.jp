@@ -16,33 +16,11 @@ window.onload = async (event) => {
   const paragraph = document.querySelector("#previousWord");
   paragraph.innerHTML = `前の単語: ${previousWord}`;
   document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const charLimit = urlParams.get('charLimit');
-  const timeLimit = urlParams.get('timeLimit');
-
-  if (charLimit) {
-    document.getElementById('nextWordInput').setAttribute('maxlength', charLimit);
-  }
-
-  if (timeLimit) {
-    let timer;
-    document.getElementById('nextWordInput').oninput = function() {
-      clearTimeout(timer);
-      timer = setTimeout(function() {
-        document.getElementById('nextWordSendButton').click();
-      }, timeLimit * 1000);
-    };
-  }
 }
 
 document.querySelector("#nextWordSendButton").onclick = async (event) => {
   const nextWordInput = document.querySelector("#nextWordInput");
   const nextWordInputText = nextWordInput.value;
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const charLimit = urlParams.get('charLimit');
-  const timeLimit = urlParams.get('timeLimit');
 
   const response = await fetch("/shiritori", {
     method: "POST",
@@ -73,11 +51,4 @@ document.querySelector("#nextWordInput").addEventListener("keypress", async (eve
     event.preventDefault();
     document.querySelector("#nextWordSendButton").click();
   }
-});
-
-document.querySelector("#nextWordInput").addEventListener("input", () => {
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    document.querySelector("#nextWordSendButton").click();
-  }, timeLimit * 1000);
 });

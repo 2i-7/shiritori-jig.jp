@@ -36,6 +36,7 @@
 <body>
   <img src="image/title-result.png" alt="結果" style="width: 200px;">
   <p id="errorMessage" class="error"></p>
+  <p id="wordCountMessage"></p> <!-- 追加 -->
   <img id="dino" src="image/dino.png" alt="dino"><br><br>
   <button id="toggleWordsButton">結果の表示</button>
   <ul id="wordHistory" style="display: none;"></ul>
@@ -56,6 +57,9 @@
         wordList.appendChild(listItem);
       });
 
+      const wordCount = wordHistory.length; // 追加
+      document.getElementById("wordCountMessage").textContent = `合計 ${wordCount} 単語入力しました。`; // 追加
+
       const toggleWordsButton = document.getElementById("toggleWordsButton");
       toggleWordsButton.addEventListener("click", () => {
         if (wordList.style.display === "none") {
@@ -69,7 +73,7 @@
         }
       });
 
-      document.getElementById("homeButton").addEventListener("click", async () => {
+      document.querySelector(".home-button").addEventListener("click", async () => {
         await fetch("/clearWordHistory", { method: "POST" });
         localStorage.removeItem("wordHistory");
         localStorage.removeItem("errorMessage");

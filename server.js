@@ -73,6 +73,3 @@ Deno.serve(async (request) => {
     enableCors: true,
   });
 });
-
-
-
