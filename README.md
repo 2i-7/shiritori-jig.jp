@@ -167,7 +167,7 @@
 
 ・[Denoの静的ファイルサーバーを3行で書く](https://qiita.com/access3151fq/items/0ff2c50874bba3869ef0)
 
-・["GETメゾット"と"POSTメゾット"の違い](https://wa3.i-3-i.info/diff7method.html
+・["GETメゾット"と"POSTメゾット"の違い](https://wa3.i-3-i.info/diff7method.html)
 
 ・[ファイルの読み込みを許可するpermission](https://qiita.com/kt3k/items/53174d45304f3a7d6ddb)
 
