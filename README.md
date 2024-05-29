@@ -188,7 +188,7 @@
 
 ・[◯秒後にリダイレクトする方法](https://1-notes.com/javascript-redirect-after-x-seconds/)
 
-・[ページ読み込み後に行う処理]([https://www.sejuku.net/blog/19754](https://qiita.com/s_ryota/items/ac26a2fb9a62c16561ce))
+・[ページ読み込み後に行う処理](https://qiita.com/s_ryota/items/ac26a2fb9a62c16561ce)
 
 ・[ブラウザにデータを保存](https://b-risk.jp/blog/2021/07/sessionstorage/)
 
