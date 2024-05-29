@@ -6,6 +6,13 @@
 
 ・開発期限3日前、エラーがひっきりなしに出た焦りから、[強制的にpushする方法](https://qiita.com/Takao_/items/5e563d5ea61d2829e497)を試したら、いままでの履歴たちがいなくなってしまいました。がんばります。
 
+# 使用技術
+|TapToStartの画面|モード選択画面|
+|----|----|
+|![taptostart](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/4f48b334-c478-417a-b220-f3fb9b5c86d3)
+|![taptostart2](https://github.com/2i-7/shiritori-jig.jp/assets/169513507/78d53eae-93ce-4ae2-9fc6-3f1d0c65243d)|
+
+
 
 # 実装した機能
 
@@ -120,9 +127,7 @@
 
 ・[READMEに画像を表示する](https://qiita.com/kimino0525/items/aa13c6450071dac6be75)
 
-
-技術面
-
+・[読みたくなるREADMEの書き方](https://qiita.com/ren_ichinose/items/15b5a156ae43ea2b3425)
 ### Deno
 
 ・[非同期処理とは？ 同期処理との違い、実装方法について解説](https://www.rworks.jp/system/system-column/sys-entry/21730/)
