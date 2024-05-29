@@ -1,3 +1,5 @@
+<!-- game.html -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +10,8 @@
 <body>
   <h1><img src="image/title-multi.png" alt="しりとり" style="width: 300px;"></h1>
   <p id="previousWord"></p>
+  <!-- プレイヤーアイコンを表示 -->
+  <img id="playerIcon" src="" alt="プレイヤーアイコン" style="width: 100px;">
   <p id="currentPlayer"></p>
   <input id="nextWordInput" type="text" />
   <button id="nextWordSendButton">送信</button>
@@ -21,19 +25,5 @@
       await fetch("/clearWordHistory", { method: "POST" });
     }
   </script>
-  <script>
-    function clearWordHistory() {
-      fetch("/clearWordHistory", { method: "POST" });
-    }
-  
-    document.querySelector(".home-button").addEventListener("click", function() {
-      document.getElementById("homeButtonImage").src = "image/home-smoke.png";
-      setTimeout(function() {
-        window.location.href = "TapToStart.html";
-      }, 1000); // 1秒後にリダイレクト
-    });
-  </script>
-  
 </body>
-</html>
 </html>

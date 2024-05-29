@@ -1,6 +1,21 @@
+// script-for-multiplayer.js
+
 let playerNames = JSON.parse(localStorage.getItem("playerNames"));
 let currentPlayerIndex = 0;
+let playerIcons = {};
 
+function getRandomPlayerIcon() {
+  const playerIcons = ["image/boy1.png", "image/boy2.png", "image/girl1.png", "image/girl2.png"];
+  const randomIndex = Math.floor(Math.random() * playerIcons.length);
+  return playerIcons[randomIndex];
+}
+
+// 各プレイヤーにランダムなアイコンを割り当てる
+playerNames.forEach(player => {
+  playerIcons[player] = getRandomPlayerIcon();
+});
+
+// プレイヤーアイコンをシャッフル
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -16,6 +31,9 @@ window.onload = async (event) => {
   const paragraph = document.querySelector("#previousWord");
   paragraph.innerHTML = `前の単語: ${previousWord}`;
   document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
+
+  // プレイヤーアイコンを設定
+  document.querySelector("#playerIcon").src = playerIcons[playerNames[currentPlayerIndex]];
 }
 
 document.querySelector("#nextWordSendButton").onclick = async (event) => {
@@ -37,6 +55,9 @@ document.querySelector("#nextWordSendButton").onclick = async (event) => {
     // 次のプレイヤーに交代
     currentPlayerIndex = (currentPlayerIndex + 1) % playerNames.length;
     document.querySelector("#currentPlayer").innerHTML = `現在のプレイヤー: ${playerNames[currentPlayerIndex]}`;
+
+    // プレイヤーアイコンを更新
+    document.querySelector("#playerIcon").src = playerIcons[playerNames[currentPlayerIndex]];
   } else {
     const errorResponse = await response.json();
     localStorage.setItem('lastPlayer', errorResponse.lastPlayer); // 追加
